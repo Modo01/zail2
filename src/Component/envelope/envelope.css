@@ -1,0 +1,97 @@
+:root {
+  --bg-color: #0e300e;
+  --envelope-color: #0d2b1d;
+  --flap-color: #f7ca79;
+  --mail-color: white;
+  --shadow-color: rgba(0, 0, 0, 0.25);
+  --text-color: #333;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-size: cover; /* Ensures the image covers the entire viewport */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95vh;
+}
+
+.envelope-container {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center;
+  align-items: center;
+}
+
+.top-image,
+.bottom-image {
+  width: 300px; /* Adjust width of images */
+  margin: 10px 0; /* Add spacing between the envelope and the images */
+}
+
+.envelope-wrapper {
+  position: relative;
+  width: 400px;
+  height: 250px;
+  cursor: pointer;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.envelope-wrapper.open .flap {
+  transform: rotateX(-180deg);
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--envelope-color);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: 200px solid transparent;
+  border-right: 200px solid transparent;
+  border-top: 150px solid var(--flap-color);
+  transform-origin: top;
+  transform: rotateX(0deg);
+  transition: transform 0.6s ease-in-out;
+  z-index: 2;
+}
+
+.mail {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  width: 90%;
+  height: 70%;
+  background: var(--mail-color);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.6s ease-in-out;
+}
+
+.envelope-wrapper.open .mail {
+  transform: translate(-50%, 0%);
+}
+
+.mail .text {
+  font-family: "Times New Roman", serif;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
